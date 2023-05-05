@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+ 
+{% block start %} 
+<div class="container">
+<form class="form-control mt-4"  method="post" enctype="multipart/form-data" >
+    {% csrf_token %}
+<h3 class="text-center  text-red">Add Receipe</h3>
+<label  for="receipe_name">Receipe Name</label>
+<input class="form-control mb-3" type="text" name='receipe_name'>
+
+<label for="receipe_desc">Receipe Description</label>
+<textarea rows="5" cols="10" class="form-control mb-3" type="text" name='receipe_desc'></textarea>
+
+<label for="name">Receipe Image</label>
+<input class="form-control mb-3" type="file"   name='receipe_image'>
+
+<button type="submit" class="btn btn-primary"> Add Receipe</button>
+</form>
+
+<hr>
+<table class="table mt-4">
+    <tr>
+        <th>Receipe SR. NO</th>
+         <th> Receipe Name</th>
+         <th> Receipe desc</th>
+         <th> Receipe Image</th>
+    </tr>
+    {% for resp in res %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{resp.receipe_name}}</td>
+        <td>{{resp.receipe_desc}}</td>
+        <td><img style="width: 100px;" src="{{ resp.receipe_image }}" alt=""></td>
+    </tr>
+{% endfor %}
+</table>
+
+
+
+</div>
+{% endblock start %}

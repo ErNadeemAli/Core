@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block start %}
+<div class="container">
+    
+        <br>
+        <a href="{% url 'student' %}" class="btn btn-primary "> <- Back</a>
+        <a href="{% url 'top' %}" class="btn btn-primary "> see top list</a>
+
+
+<h4>Ranks : {{current_rank}}</h4>
+ 
+    <table class=" table-bordered table mt-4">
+        <tr class="text-center">
+            <th>#</th>
+            <th>Subject Name</th>
+            <th>Total</th>
+            <th>Marks</th>
+            
+        </tr>
+        {% for marks in queryset %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td> <b> {{marks.subject.subject_name}} </b></td>
+            <td>  {{100}} </td>
+            <td class='text-center'>{{marks.marks}}</td>
+            
+        </tr>
+     
+        {% empty %}
+        <tr>
+            <td colspan="4" style="color: red; text-align: center; font-size: larger; font-weight: bold;">No Record Found</td>
+        </tr>
+
+        {% endfor %}
+        <tr>
+        
+            <td colspan="3" style="text-align: right; padding-right: 30px; font-weight: bold;">Total Marks : {{total}}</td>
+            <td colspan=""  style="font-weight: bold; text-align: center;">Obtained marks: {{total_marks.total_mark}}</td>
+        </tr>
+    </table>
+ 
+    
+</div>
+
+
+{% endblock start %}

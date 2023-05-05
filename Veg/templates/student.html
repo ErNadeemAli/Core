@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block start %}
+<div class="container">
+    
+    <form action="" method="get" class="mt-4">
+      
+        <input type="text" name="search">
+        <button>Search</button>     <a href="{% url 'top' %}" class="btn btn-primary "> see top list</a>
+    </form>
+
+    <table class="table table-bordered  mt-4">
+        <tr class="text-center">
+            <th>#</th>
+            <th>Student ID</th>
+            <th>Student Name</th>
+            <th>Department</th>
+            <th>Student Email</th>
+            <th>Student Age</th>
+        </tr>
+        {% for stu in queryset %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td><a href="{% url 'marks' stu.student_id %}">{{stu.student_id}}</a></td>
+            <td>{{stu.student_name}}</td>
+            <td>{{stu.department}}</td>
+            <td>{{stu.student_email}}</td>
+            <td>{{stu.student_age}}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" style="color: red; text-align: center; font-size: larger; font-weight: bold;">No Record Found</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+ 
+    <div class="row">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <!-- <span class="step-links"> -->
+                    {% if queryset.has_previous %}
+                    <li class="page-item"> <a class="page-link" href="?page=1"> First Page</a></li>
+                    <li class="page-item"> <a class="page-link"
+                            href="?page={{ queryset.previous_page_number }}">previous</a></li>
+
+                    {% endif %}
+
+                   
+
+                    {% if queryset.has_next %}
+                    <li class="page-item"> <a class="page-link" href="?page={{ queryset.next_page_number }}">next</a>
+                    </li>
+                    <li class="page-item"> <a class="page-link" href="?page={{ queryset.paginator.num_pages }}">last</a>
+                    </li>
+                    <span class="current m-2">
+                        Page {{ queryset.number }} of {{ queryset.paginator.num_pages }}.
+                    </span>
+
+                    {% endif %}
+                <!-- </span> -->
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+{% endblock start %}

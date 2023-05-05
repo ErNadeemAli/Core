@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block start %}
+<div class="container">
+    
+        <br>
+        <a href="{% url 'student' %}" class="btn btn-primary "> <- Back</a>
+
+
+<h4>Top 10 Students</h4>
+ 
+    <table class=" table-bordered table mt-4">
+        <tr class="text-center">
+            <th>#</th>
+            <th>Subject Name</th>
+            <th>deparment</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Age</th>
+            <th>Ranks</th>
+            <th>Marks</th>
+        </tr>
+        {% for marks in ranks %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td> <b> {{marks.student_name}} </b></td>
+            <td>  {{marks.department}} </td>
+            <td>  {{marks.student_email}} </td>
+            <td>  {{marks.student_address}} </td>
+            <td>  {{marks.student_age}} </td>
+            <td>  {{forloop.counter}} </td>
+            <td>  {{marks.marks}} </td>
+           
+            
+        </tr>
+     
+        {% empty %}
+        <tr>
+            <td colspan="4" style="color: red; text-align: center; font-size: larger; font-weight: bold;">No Record Found</td>
+        </tr>
+
+        {% endfor %}
+      
+    </table>
+ 
+    
+</div>
+
+
+{% endblock start %}
